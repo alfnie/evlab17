@@ -397,8 +397,7 @@ if isfield(options,'dicoms')
         end
         allfiles=cat(1,allfiles,conn_sortfilenames(cellstr(files)));
     end
-    %Series=conn_dcmdir(filenames);
-    %[filenameout,filetypeout,fileRTout,filedescripout]=conn_dcm2nii(Series,opts{:},varargin{:});
+    %[outstruct,files,fdescrip,ftypes,frt]=conn_dcmconvert(allfiles,'folderout','../nii','overwrite',false,dicom_options{:});
     [files,ftypes,frt,fdescrip]=conn_dcm2nii(allfiles,dicom_options{:});
     if isfield(options,'RT')
         if any(frt(~isnan(frt))~=options.RT), fprintf('WARNING: Inconsistent RT values found in dicom (%s) compared to RT field entered in .cfg file (%s). The value in .cfg file takes precedence',mat2str(frt),mat2str(options.RT)); end
